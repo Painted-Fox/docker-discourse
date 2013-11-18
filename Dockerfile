@@ -14,12 +14,12 @@ RUN apt-get install -y python-software-properties && \
         apt-add-repository -y ppa:nginx/stable && \
         apt-get update
 
-RUN apt-get install -y postgresql postgresql-contrib postfix \  # Postgres and sendmail
+RUN apt-get install -y postgresql postgresql-contrib postfix \
         redis-server \
         nginx \
         build-essential libssl-dev libyaml-dev git libtool \
         libxslt-dev libxml2-dev libpq-dev gawk curl pngcrush imagemagick  \
-        libzmq-dev libevent-dev python-dev python-pip  # Circus
+        libzmq-dev libevent-dev python-dev python-pip
 
 # Create the discourse user.
 RUN adduser --shell /bin/bash --gecos 'Discourse application' discourse
@@ -45,7 +45,7 @@ RUN /bin/su discourse -c \
         git clone https://github.com/discourse/discourse.git /var/www/discourse && \
         cd /var/www/discourse && \
         git checkout latest-release && \
-        sed -i -e"s/^source 'https:\/\/rubygems\.org'/source 'http:\/\/rubygems\.org'/" /var/www/discourse/Gemfile && \
+        sed -i -e"s/^source 'https:\\/\\/rubygems\\.org'/source 'http://rubygems.org'/" /var/www/discourse/Gemfile && \
         bundle install --deployment --without test'
 
 # Configure Discourse
